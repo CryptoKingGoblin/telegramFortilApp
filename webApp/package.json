@@ -4,7 +4,8 @@
   "description": "Mini-App Telegram",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "build": "npm install && npm run vite build",
+  "start": "npm run build && node server.js"
   },
   "dependencies": {
     "express": "^4.18.2"
