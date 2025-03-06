@@ -4,20 +4,26 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// 📡 Vérifier que l'application reçoit des requêtes
-app.use((req, res, next) => {
-    console.log(`🌐 Requête reçue : ${req.method} ${req.url}`);
-    next();
-});
+// ✅ Vérifier que le serveur démarre bien
+console.log("🟢 Démarrage du serveur Express...");
+console.log("📂 Vérification du dossier 'dist'...");
 
-// 📂 Servir la WebApp React/Vite depuis "dist"
-app.use(express.static(path.join(__dirname, "dist")));
+const fs = require("fs");
+const distPath = path.join(__dirname, "dist");
+if (!fs.existsSync(distPath)) {
+    console.error("❌ ERREUR : Le dossier 'dist' est introuvable !");
+    process.exit(1); // 🔴 Forcer l'arrêt si le dossier est manquant
+}
+
+// 📂 Servir les fichiers React/Vite depuis "dist"
+app.use(express.static(distPath));
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "index.html"));
+    console.log(`🌐 Requête reçue : ${req.method} ${req.url}`);
+    res.sendFile(path.join(distPath, "index.html"));
 });
 
-// ✅ Éviter que Railway tue l’application
+// ✅ Écouter le port
 app.listen(PORT, () => {
     console.log(`🚀 WebApp en ligne sur le port ${PORT}`);
 });
