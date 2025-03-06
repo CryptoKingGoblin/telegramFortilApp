@@ -35,4 +35,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Bot en ligne sur le port ${PORT} 🚀`);
 });
-bot.launch();
+bot.launch({ dropPendingUpdates: true });
+console.log("🤖 Bot lancé en mode Webhook !");
+
