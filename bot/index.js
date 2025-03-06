@@ -30,11 +30,22 @@ app.post("/webhook", (req, res) => {
     res.sendStatus(200);
 });
 
-// ✅ Lancer Express + Bot
+
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Bot en ligne sur le port ${PORT} 🚀`);
+console.log(`🚀 Bot en ligne sur le port ${PORT}`);
+
+// Webhook pour gérer les requêtes Telegram
+app.post("/webhook", (req, res) => {
+    bot.handleUpdate(req.body);
+    res.sendStatus(200);
 });
+
+// Serveur Express pour empêcher Railway d'arrêter l'app
+app.listen(PORT, () => {
+    console.log(`🌍 Serveur Express en écoute sur le port ${PORT}`);
+});
+
+
 bot.launch({ dropPendingUpdates: true });
 console.log("🤖 Bot lancé en mode Webhook !");
 
