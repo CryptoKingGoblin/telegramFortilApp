@@ -167,7 +167,7 @@
       el('header', {}, [
         el('div', { class: 'avatar' }, [ el('span', {}, [document.createTextNode('✨')]) ]),
         el('div', {}, [
-          el('div', { class: 'title' }, [ document.createTextNode('Menu principal') ]),
+          el('div', { class: 'title' }, [ document.createTextNode('Accueil App ASTRAL') ]),
           el('div', { class: 'subtitle' }, [ document.createTextNode(`Bienvenue, ${name} !`) ])
         ])
       ]),
